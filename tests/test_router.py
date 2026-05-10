@@ -35,3 +35,7 @@ def test_default_to_azure_for_whitespace_input() -> None:
 
 def test_detect_azure_from_url_context() -> None:
     assert detect_provider("Veja https://learn.microsoft.com/azure/cost-management-billing/") == Provider.AZURE
+
+
+def test_detect_huawei_from_url_context() -> None:
+    assert detect_provider("Confira https://www.huaweicloud.com/intl/en-us/pricing.html") == Provider.HUAWEI

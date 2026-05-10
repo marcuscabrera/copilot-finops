@@ -11,7 +11,7 @@ class Provider(str, Enum):
 
 
 _AZURE_PATTERN = re.compile(
-    r"\b(azure|microsoft\s*365|m365|fabric|foundry|copilot\s+for\s+microsoft\s*365|m365\s+copilot)\b",
+    r"\b(azure|microsoft\s*365|m365|fabric|azure\s*ai\s*foundry|microsoft\s*foundry|copilot\s+for\s+microsoft\s*365|m365\s+copilot)\b",
     re.IGNORECASE,
 )
 _HUAWEI_PATTERN = re.compile(r"\b(huawei|huaweicloud)\b", re.IGNORECASE)
