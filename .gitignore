@@ -1,65 +1,42 @@
 ```
-# Environment variables
+# Environment
 .env
 .env.local
 .env.*
 
-# Docker related
-docker/_data/
-docker/logs/
-
 # Dependencies
-node_modules/
-venv/
 .venv/
+venv/
 __pycache__/
-*.egg-info/
-.Python
-
-# Build artifacts
-dist/
-build/
 *.pyc
 *.pyo
 *.pyd
-*.so
-*.dylib
-*.dll
-*.exe
-*.o
-*.obj
-*.a
-*.lib
+
+# Build and distribution artifacts
+dist/
+build/
+*.egg-info/
 
 # Logs
 *.log
-logs/
 
-# Coverage reports
-.coverage
-htmlcov/
-coverage/
-
-# IDE specific
+# Editor/IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-.DS_Store
-Thumbs.db
+*.tmp
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
 
 # Testing
 .pytest_cache/
 .mypy_cache/
-.nyc_output/
-coverage/
 
-# OS generated
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 ```
