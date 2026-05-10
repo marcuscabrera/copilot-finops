@@ -1,1 +1,15 @@
-Nothing should be ignored based on the provided file changes. The changes only include source/config files (.gitignore, .md files) and no build artifacts, dependencies, or temporary files that would require ignoring.
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/

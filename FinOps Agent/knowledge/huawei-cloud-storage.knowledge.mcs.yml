@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Storage (OBS)
+# Official Huawei Cloud object storage documentation and pricing context.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/product/obs.html
