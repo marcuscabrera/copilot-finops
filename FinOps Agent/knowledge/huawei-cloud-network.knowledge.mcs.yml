@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Network (VPC, CDN)
+# Official Huawei Cloud networking documentation for architecture and network cost drivers.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/product/vpc.html

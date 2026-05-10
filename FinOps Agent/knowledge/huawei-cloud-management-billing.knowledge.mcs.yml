@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Management & Billing
+# Official Huawei Cloud pricing and billing entrypoint for cost governance, planning, and charge analysis.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/pricing.html

@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Data & AI
+# Official Huawei Cloud AI and data platform documentation for workload planning and cost optimization.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/product/modelarts.html
