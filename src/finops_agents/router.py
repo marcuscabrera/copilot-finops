@@ -11,7 +11,7 @@ class Provider(str, Enum):
 
 
 _AZURE_PATTERN = re.compile(r"\b(azure|microsoft\s*365|m365|fabric|foundry|copilot)\b", re.IGNORECASE)
-_HUAWEI_PATTERN = re.compile(r"\b(huawei|huaweicloud|ecs|obs|rds|vpc|cce|waf|cdn)\b", re.IGNORECASE)
+_HUAWEI_PATTERN = re.compile(r"\b(huawei|huaweicloud)\b", re.IGNORECASE)
 _COMPARISON_PATTERN = re.compile(r"\b(vs|versus|compar|comparison|cross[-\s]?cloud|multi[-\s]?cloud)\b", re.IGNORECASE)
 
 

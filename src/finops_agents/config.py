@@ -13,9 +13,20 @@ class Settings:
 
 
 def load_settings() -> Settings:
+    temperature_value = os.getenv("FINOPS_TEMPERATURE", "0.2")
+    max_tokens_value = os.getenv("FINOPS_MAX_TOKENS", "1200")
+    try:
+        temperature = float(temperature_value)
+    except ValueError as exc:
+        raise ValueError(f"FINOPS_TEMPERATURE inválido: '{temperature_value}'") from exc
+    try:
+        max_tokens = int(max_tokens_value)
+    except ValueError as exc:
+        raise ValueError(f"FINOPS_MAX_TOKENS inválido: '{max_tokens_value}'") from exc
+
     return Settings(
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
         openai_base_url=os.getenv("OPENAI_BASE_URL") or None,
-        temperature=float(os.getenv("FINOPS_TEMPERATURE", "0.2")),
-        max_tokens=int(os.getenv("FINOPS_MAX_TOKENS", "1200")),
+        temperature=temperature,
+        max_tokens=max_tokens,
     )

@@ -36,8 +36,12 @@ _OFFICIAL_SOURCES = {
 def load_local_knowledge() -> str:
     chunks: list[str] = []
     for path in _LOCAL_DOCS:
-        if path.exists():
+        if not path.exists():
+            continue
+        try:
             chunks.append(f"# Fonte local: {path.name}\n" + path.read_text(encoding="utf-8"))
+        except OSError as exc:
+            raise RuntimeError(f"Falha ao carregar a fonte de conhecimento local: {path}") from exc
     return "\n\n".join(chunks)
 
 

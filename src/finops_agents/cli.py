@@ -24,7 +24,7 @@ def main() -> None:
         print(result.answer)
         return
 
-    print("FinOps Agents pronto. Digite sua pergunta (ou 'sair').")
+    print("FinOps Agents pronto. Digite sua pergunta (ou 'sair/exit/quit').")
     while True:
         question = input("\n> ").strip()
         if question.lower() in {"sair", "exit", "quit"}:
