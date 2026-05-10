@@ -44,7 +44,8 @@ def load_local_knowledge() -> str:
             chunks.append(f"# Fonte local: {path.name}\n" + path.read_text(encoding="utf-8"))
         except OSError as exc:
             raise RuntimeError(
-                f"Falha ao carregar a fonte de conhecimento local: {path} ({exc})"
+                f"Falha ao carregar a fonte de conhecimento local: {path} ({exc}). "
+                "Verifique permissões, integridade e codificação do arquivo."
             ) from exc
     if missing_files:
         chunks.append(
@@ -56,6 +57,8 @@ def load_local_knowledge() -> str:
 
 
 def build_context(provider: Provider) -> str:
+    if provider not in _OFFICIAL_SOURCES:
+        raise ValueError(f"Provider não suportado para contexto: {provider}")
     source_list = "\n".join(f"- {url}" for url in _OFFICIAL_SOURCES[provider])
     local_knowledge = load_local_knowledge()
     return (
