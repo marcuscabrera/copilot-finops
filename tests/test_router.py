@@ -23,3 +23,15 @@ def test_default_to_azure_when_no_provider_found() -> None:
 
 def test_detect_comparison_keyword_without_provider_names() -> None:
     assert detect_provider("Preciso de uma análise multi-cloud de custos") == Provider.COMPARISON
+
+
+def test_default_to_azure_for_empty_input() -> None:
+    assert detect_provider("") == Provider.AZURE
+
+
+def test_default_to_azure_for_whitespace_input() -> None:
+    assert detect_provider("   ") == Provider.AZURE
+
+
+def test_detect_azure_from_url_context() -> None:
+    assert detect_provider("Veja https://learn.microsoft.com/azure/cost-management-billing/") == Provider.AZURE

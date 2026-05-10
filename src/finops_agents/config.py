@@ -18,11 +18,15 @@ def load_settings() -> Settings:
     try:
         temperature = float(temperature_value)
     except ValueError as exc:
-        raise ValueError(f"FINOPS_TEMPERATURE inválido: '{temperature_value}'") from exc
+        raise ValueError(
+            f"FINOPS_TEMPERATURE inválido: '{temperature_value}'. Use um número decimal (float)."
+        ) from exc
     try:
         max_tokens = int(max_tokens_value)
     except ValueError as exc:
-        raise ValueError(f"FINOPS_MAX_TOKENS inválido: '{max_tokens_value}'") from exc
+        raise ValueError(
+            f"FINOPS_MAX_TOKENS inválido: '{max_tokens_value}'. Use um número inteiro."
+        ) from exc
 
     return Settings(
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
