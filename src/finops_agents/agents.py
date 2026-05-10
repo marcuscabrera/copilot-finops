@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
+from litellm import completion
 
-from .config import load_settings
+from .config import LLMProvider, load_settings
 from .knowledge import build_context
 from .router import Provider, detect_provider
 
@@ -38,30 +36,66 @@ class AgentResponse:
 
 class FinOpsAgentSystem:
     def __init__(self) -> None:
-        settings = load_settings()
-        self._llm = ChatOpenAI(
-            model=settings.openai_model,
-            temperature=settings.temperature,
-            max_tokens=settings.max_tokens,
-            base_url=settings.openai_base_url,
-        )
+        self._settings = load_settings()
+
+    def _build_model_name(self) -> str:
+        """Constrói o nome do modelo no formato esperado pelo LiteLLM."""
+        settings = self._settings
+        provider = settings.llm_provider
+
+        if provider == LLMProvider.OPENAI:
+            return f"openai/{settings.model}"
+        elif provider == LLMProvider.OLLAMA:
+            return f"ollama/{settings.model}"
+        elif provider == LLMProvider.LMSTUDIO:
+            return f"lm-studio/{settings.model}"
+        elif provider == LLMProvider.OPENROUTER:
+            return f"openrouter/{settings.model}"
+        elif provider == LLMProvider.OPENCODE_ZEN:
+            return f"openai/{settings.model}"
+        elif provider == LLMProvider.GOOGLE_GEMINI_API:
+            return f"gemini/{settings.model}"
+        elif provider == LLMProvider.GOOGLE_GEMINI_OAUTH:
+            return f"gemini/{settings.model}"
+        else:
+            return f"openai/{settings.model}"
+
+    def _call_llm(self, messages: list[dict]) -> str:
+        """Chama o LLM via LiteLLM."""
+        settings = self._settings
+        model_name = self._build_model_name()
+
+        kwargs = {
+            "model": model_name,
+            "messages": messages,
+            "temperature": settings.temperature,
+            "max_tokens": settings.max_tokens,
+        }
+
+        if settings.base_url:
+            kwargs["api_base"] = settings.base_url
+
+        if settings.api_key:
+            kwargs["api_key"] = settings.api_key
+
+        response = completion(**kwargs)
+        return response.choices[0].message.content
 
     def answer(self, question: str) -> AgentResponse:
         provider = detect_provider(question)
         context = build_context(provider)
 
-        prompt = ChatPromptTemplate.from_messages(
-            [
-                ("system", _PROMPTS[provider]),
-                ("system", "{context}"),
-                (
-                    "human",
-                    "Pergunta do usuário: {question}\n"
-                    "Inclua links oficiais relevantes na resposta quando aplicável.",
+        messages = [
+            {"role": "system", "content": _PROMPTS[provider]},
+            {"role": "system", "content": context},
+            {
+                "role": "user",
+                "content": (
+                    f"Pergunta do usuário: {question}\n"
+                    "Inclua links oficiais relevantes na resposta quando aplicável."
                 ),
-            ]
-        )
+            },
+        ]
 
-        chain = prompt | self._llm | StrOutputParser()
-        answer = chain.invoke({"context": context, "question": question})
+        answer = self._call_llm(messages)
         return AgentResponse(provider=provider, answer=answer)
