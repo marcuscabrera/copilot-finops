@@ -35,13 +35,21 @@ _OFFICIAL_SOURCES = {
 
 def load_local_knowledge() -> str:
     chunks: list[str] = []
+    missing_files: list[str] = []
     for path in _LOCAL_DOCS:
         if not path.exists():
+            missing_files.append(path.name)
             continue
         try:
             chunks.append(f"# Fonte local: {path.name}\n" + path.read_text(encoding="utf-8"))
         except OSError as exc:
             raise RuntimeError(f"Falha ao carregar a fonte de conhecimento local: {path}") from exc
+    if missing_files:
+        chunks.append(
+            "# Aviso\n"
+            "As seguintes fontes locais não foram encontradas e não entrarão no contexto: "
+            + ", ".join(missing_files)
+        )
     return "\n\n".join(chunks)
 
 
