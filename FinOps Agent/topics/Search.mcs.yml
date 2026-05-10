@@ -15,7 +15,7 @@ beginDialog:
       id: provider-routing
       conditions:
         - id: unsupported-provider
-          condition: =And(IsMatch(Topic.UserInputLower, "aws|google cloud|gcp|oracle cloud|oci|alibaba|alicloud"), Not(IsMatch(Topic.UserInputLower, "azure|huawei")))
+          condition: =IsMatch(Topic.UserInputLower, "aws|google cloud|gcp|oracle cloud|oci|alibaba|alicloud")
           actions:
             - kind: SendActivity
               id: sendMessage_unsupported_provider
@@ -26,7 +26,7 @@ beginDialog:
               clearTopicQueue: true
 
         - id: ambiguous-provider
-          condition: =And(IsMatch(Topic.UserInputLower, "cloud|provider|provedor"), Not(IsMatch(Topic.UserInputLower, "azure|huawei")))
+          condition: =And(IsMatch(Topic.UserInputLower, "multi-cloud|multicloud|cross-cloud|cross cloud|compare providers|provedores"), Not(IsMatch(Topic.UserInputLower, "azure|huawei")))
           actions:
             - kind: SendActivity
               id: sendMessage_ambiguous_provider
@@ -59,7 +59,7 @@ beginDialog:
               id: end-topic
               clearTopicQueue: true
         - id: huawei-no-answer
-          condition: =IsMatch(Topic.UserInputLower, "huawei")
+          condition: =And(IsBlank(Topic.Answer), IsMatch(Topic.UserInputLower, "huawei"))
           actions:
             - kind: SendActivity
               id: sendMessage_huawei_no_answer
