@@ -9,6 +9,10 @@ def test_detect_azure() -> None:
     assert detect_provider("Como reduzir custos no Azure Cost Management?") == Provider.AZURE
 
 
+def test_detect_huawei_case_insensitive() -> None:
+    assert detect_provider("Como reduzir custos no HuAwEi Cloud?") == Provider.HUAWEI
+
+
 def test_detect_comparison() -> None:
     assert detect_provider("Compare Azure e Huawei para workload de IA") == Provider.COMPARISON
 

@@ -15,7 +15,10 @@ _AZURE_PATTERN = re.compile(
     re.IGNORECASE,
 )
 _HUAWEI_PATTERN = re.compile(r"\b(huawei|huaweicloud)\b", re.IGNORECASE)
-_COMPARISON_PATTERN = re.compile(r"\b(vs|versus|compar|comparison|cross[-\s]?cloud|multi[-\s]?cloud)\b", re.IGNORECASE)
+_COMPARISON_PATTERN = re.compile(
+    r"\b(vs|versus|compare|comparar|comparison|comparativo|cross[-\s]?cloud|multi[-\s]?cloud)\b",
+    re.IGNORECASE,
+)
 
 
 def detect_provider(query: str) -> Provider:

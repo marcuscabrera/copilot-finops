@@ -43,7 +43,9 @@ def load_local_knowledge() -> str:
         try:
             chunks.append(f"# Fonte local: {path.name}\n" + path.read_text(encoding="utf-8"))
         except OSError as exc:
-            raise RuntimeError(f"Falha ao carregar a fonte de conhecimento local: {path}") from exc
+            raise RuntimeError(
+                f"Falha ao carregar a fonte de conhecimento local: {path} ({exc})"
+            ) from exc
     if missing_files:
         chunks.append(
             "# Aviso\n"
