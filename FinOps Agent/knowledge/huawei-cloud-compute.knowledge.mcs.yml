@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Compute (ECS, CCE, RDS)
+# Official Huawei Cloud compute and container product documentation for capacity planning, architecture, and cost optimization context.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/product/ecs.html

@@ -1,6 +1,6 @@
 # FinOps Agent — Microsoft Copilot Studio Sample
 
-> A production-ready **FinOps Advisor agent** built with Microsoft Copilot Studio. Helps organizations understand, manage, and optimize Microsoft cloud spending across Azure, Microsoft 365, Copilot, AI Foundry, and Fabric — grounded in official Microsoft Learn documentation.
+> A production-ready **FinOps Advisor agent** built with Microsoft Copilot Studio. Helps organizations understand, manage, and optimize cloud spending across Microsoft services and Huawei Cloud — grounded in official provider documentation.
 
 <p align="center">
   <img src="FinOps Agent/icon.png" alt="FinOps Agent Icon" width="120" />
@@ -24,7 +24,7 @@
 
 ## What This Agent Does
 
-The **FinOps Agent** applies [FinOps Foundation](https://www.finops.org/) principles to Microsoft cloud services, giving your team instant, grounded guidance on:
+The **FinOps Agent** applies [FinOps Foundation](https://www.finops.org/) principles to cloud services, giving your team instant, grounded guidance on:
 
 | Domain | Coverage |
 |---|---|
@@ -33,9 +33,11 @@ The **FinOps Agent** applies [FinOps Foundation](https://www.finops.org/) princi
 | **Microsoft Copilot** | M365 Copilot licensing, Copilot Studio consumption billing, ROI |
 | **Microsoft Foundry** | Token-based pricing, model deployment costs, AI workload optimization |
 | **Microsoft Fabric** | Capacity units, workload cost management, reserved capacity |
+| **Huawei Cloud** | IAM, VPC, ECS, OBS, RDS, CCE, CDN, WAF, billing and governance |
+| **Cross-cloud Analysis** | Azure vs Huawei comparison with source-grounded caveats |
 | **FinOps Best Practices** | Chargeback/showback, tagging, budgeting, forecasting, cost allocation |
 
-All answers are **grounded in official Microsoft Learn documentation** through semantic search — no hallucinations, no guesswork.
+All answers are **grounded in official provider documentation** through semantic search — no hallucinations, no guesswork.
 
 ---
 
@@ -46,13 +48,19 @@ FinOps Agent/
 ├── agent.mcs.yml           # Core agent config, instructions & AI settings
 ├── settings.mcs.yml        # Access control, auth, generative AI features
 ├── icon.png                # Agent icon
-├── knowledge/              # 6 Microsoft Learn knowledge sources
+├── knowledge/              # 12 knowledge sources (Microsoft + Huawei)
 │   ├── azure-cost-management-billing.knowledge.mcs.yml
 │   ├── finops-with-azure.knowledge.mcs.yml
 │   ├── azure-ai-foundry.knowledge.mcs.yml
 │   ├── copilot-for-microsoft-365.knowledge.mcs.yml
 │   ├── microsoft-365-licensing-pricing.knowledge.mcs.yml
-│   └── microsoft-fabric-pricing-capacity.knowledge.mcs.yml
+│   ├── microsoft-fabric-pricing-capacity.knowledge.mcs.yml
+│   ├── huawei-cloud-compute.knowledge.mcs.yml
+│   ├── huawei-cloud-storage.knowledge.mcs.yml
+│   ├── huawei-cloud-network.knowledge.mcs.yml
+│   ├── huawei-cloud-security.knowledge.mcs.yml
+│   ├── huawei-cloud-data-ai.knowledge.mcs.yml
+│   └── huawei-cloud-management-billing.knowledge.mcs.yml
 └── topics/                 # 13 conversation topics
     ├── ConversationStart.mcs.yml
     ├── Search.mcs.yml      # Conversational boosting / main knowledge search
@@ -141,12 +149,14 @@ Once deployed, test it with prompts like:
 - _"What's the difference between Microsoft 365 E3 and E5 from a cost perspective?"_
 - _"How is Microsoft Copilot Studio billed?"_
 - _"How do I optimize Microsoft Fabric capacity costs?"_
+- _"How do I optimize Huawei ECS and OBS costs for dev/test environments?"_
+- _"Compare Azure VM and Huawei ECS cost optimization options."_
 
 ---
 
 ## Knowledge Sources
 
-The agent automatically searches these official Microsoft Learn docs:
+The agent automatically searches official Microsoft and Huawei sources:
 
 | Source | URL |
 |---|---|
@@ -156,6 +166,22 @@ The agent automatically searches these official Microsoft Learn docs:
 | Microsoft Foundry | https://learn.microsoft.com/azure/ai-foundry/ |
 | Microsoft 365 | https://learn.microsoft.com/microsoft-365/ |
 | Copilot for Microsoft 365 | https://learn.microsoft.com/copilot/microsoft-365/ |
+| Huawei Cloud Compute | https://www.huaweicloud.com/intl/en-us/product/ecs.html |
+| Huawei Cloud Storage | https://www.huaweicloud.com/intl/en-us/product/obs.html |
+| Huawei Cloud Network | https://www.huaweicloud.com/intl/en-us/product/vpc.html |
+| Huawei Cloud Security | https://www.huaweicloud.com/intl/en-us/product/waf.html |
+| Huawei Cloud Data & AI | https://www.huaweicloud.com/intl/en-us/product/modelarts.html |
+| Huawei Cloud Management & Billing | https://www.huaweicloud.com/intl/en-us/pricing.html |
+
+---
+
+## Huawei Cloud Enablement Artifacts
+
+| Artifact | Purpose |
+|---|---|
+| `huawei-cloud-finops-coverage-catalog.md` | Scope, prioritization, and FinOps x service matrix |
+| `huawei-cloud-finops-acceptance-prompts.md` | Acceptance prompt suite and quality criteria |
+| `huawei-cloud-finops-governance.md` | Continuous governance process, roadmap, and review checklist |
 
 ---
 

@@ -13,7 +13,7 @@ beginDialog:
           actions:
             - kind: SendActivity
               id: sendMessage_QZreqo
-              activity: I'm sorry, I'm not sure how to help with that. Can you try rephrasing?
+              activity: I'm sorry, I couldn't map this request yet. I currently support FinOps guidance for Azure/Microsoft services and Huawei Cloud. Please rephrase with the provider and service name.
 
       elseActions:
         - kind: BeginDialog

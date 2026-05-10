@@ -1,0 +1,6 @@
+# Name: Huawei Cloud Security (WAF, IAM)
+# Official Huawei Cloud security documentation for managed protection, access control, and related cost considerations.
+kind: KnowledgeSourceConfiguration
+source:
+  kind: PublicSiteSearchSource
+  site: https://www.huaweicloud.com/intl/en-us/product/waf.html
