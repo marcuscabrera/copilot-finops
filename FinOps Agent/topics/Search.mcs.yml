@@ -15,7 +15,7 @@ beginDialog:
       id: provider-routing
       conditions:
         - id: unsupported-provider
-          condition: =IsMatch(Topic.UserInputLower, "aws|google cloud|gcp|oracle cloud|oci|alibaba|alicloud")
+          condition: =IsMatch(Topic.UserInputLower, "\\b(aws|google\\s+cloud|gcp|oracle\\s+cloud|oci|alibaba\\s+cloud|alicloud)\\b")
           actions:
             - kind: SendActivity
               id: sendMessage_unsupported_provider
@@ -26,7 +26,7 @@ beginDialog:
               clearTopicQueue: true
 
         - id: ambiguous-provider
-          condition: =And(IsMatch(Topic.UserInputLower, "multi-cloud|multicloud|cross-cloud|cross cloud|compare providers|provedores"), Not(IsMatch(Topic.UserInputLower, "azure|huawei")))
+          condition: =And(IsMatch(Topic.UserInputLower, "\\b(multi-cloud|multicloud|cross-cloud|cross\\s+cloud|compare\\s+providers|comparar\\s+provedores|provedor|provedores)\\b"), Not(IsMatch(Topic.UserInputLower, "azure|huawei")))
           actions:
             - kind: SendActivity
               id: sendMessage_ambiguous_provider
